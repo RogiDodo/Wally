@@ -14,11 +14,11 @@
     }
 
     h1 {
-      font-size: 48px; /* título grande */
+      font-size: 64px; /* título maior */
     }
 
     p {
-      font-size: 24px; /* parágrafo grande */
+      font-size: 32px; /* subtítulo maior */
     }
 
     #startButton {
@@ -58,7 +58,7 @@
 </head>
 <body>
   <h1>Encontre o Wally!</h1>
-  <p>Clique no botão para começar 👇</p>
+  <p id="subtitle">Clique no botão para começar 👇</p>
 
   <button id="startButton">Começar</button>
 
@@ -73,10 +73,12 @@
     const startButton = document.getElementById("startButton");
     const game = document.getElementById("game");
     const screamer = document.getElementById("screamer");
+    const subtitle = document.getElementById("subtitle");
 
     startButton.addEventListener("click", () => {
-      // esconde o botão
+      // esconde o botão e o subtítulo
       startButton.style.display = "none";
+      subtitle.style.display = "none";
 
       // mostra a imagem do Wally
       game.style.display = "block";
@@ -88,7 +90,6 @@
         document.body.style.overflow = "hidden"; 
         game.style.display = "none";
         document.querySelector("h1").style.display = "none";
-        document.querySelector("p").style.display = "none";
 
         // tenta colocar em tela cheia
         if (screamer.requestFullscreen) {
