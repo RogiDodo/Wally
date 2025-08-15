@@ -11,19 +11,30 @@
       background: #f0f0f0;
       font-family: Arial, sans-serif;
       overflow: hidden; /* evita scroll quando o vídeo aparece */
-      cursor: pointer; /* indica que precisa clicar */
     }
 
     h1 {
-      font-size: 48px; /* título maior */
+      font-size: 48px; /* título grande */
     }
 
     p {
-      font-size: 24px; /* parágrafo maior */
+      font-size: 24px; /* parágrafo grande */
+    }
+
+    #startButton {
+      font-size: 36px;
+      padding: 20px 40px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      background-color: #4CAF50;
+      color: white;
+      margin-top: 50px;
     }
 
     #game {
       margin-top: 20px;
+      display: none; /* esconde a imagem até clicar no botão */
     }
 
     #wally {
@@ -47,7 +58,9 @@
 </head>
 <body>
   <h1>Encontre o Wally!</h1>
-  <p>Clique na tela para começar 👆</p>
+  <p>Clique no botão para começar 👇</p>
+
+  <button id="startButton">Começar</button>
 
   <div id="game">
     <img id="wally" src="https://i.imgur.com/gFYWe2w.jpeg" alt="Onde está o Wally?">
@@ -57,16 +70,23 @@
   <video id="screamer" src="https://i.imgur.com/9koL09a.mp4"></video>
 
   <script>
+    const startButton = document.getElementById("startButton");
+    const game = document.getElementById("game");
     const screamer = document.getElementById("screamer");
 
-    // espera o primeiro clique do usuário
-    document.body.addEventListener("click", () => {
-      // após o clique, espera 10 segundos antes do jumpscare
+    startButton.addEventListener("click", () => {
+      // esconde o botão
+      startButton.style.display = "none";
+
+      // mostra a imagem do Wally
+      game.style.display = "block";
+
+      // inicia o temporizador do screamer
       setTimeout(() => {
         // mostra o vídeo e esconde todo o resto
         screamer.style.display = "block";
         document.body.style.overflow = "hidden"; 
-        document.getElementById("game").style.display = "none";
+        game.style.display = "none";
         document.querySelector("h1").style.display = "none";
         document.querySelector("p").style.display = "none";
 
@@ -79,9 +99,9 @@
           screamer.msRequestFullscreen();
         }
 
-        screamer.play(); // agora o áudio funciona
+        screamer.play(); // vídeo com som
       }, 10000); // 10 segundos
-    }, { once: true }); // garante que só precisa clicar uma vez
+    });
   </script>
 </body>
 </html>
